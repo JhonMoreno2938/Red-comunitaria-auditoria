@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  api-conexiones:
+    build: .
+    container_name: api-conexiones-red
+    restart: unless-stopped
+    ports:
+      - "8001:8000"  # Mapea el puerto externo 8001 de tu servidor al puerto 8000 interno de la app
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres-db:5432/red_comunitaria
+    networks:
+      - red-comunitaria-net
+
+networks:
+  red-comunitaria-net:
+    driver: bridge
